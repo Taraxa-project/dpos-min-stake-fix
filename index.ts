@@ -94,7 +94,7 @@ async function listenForNewEvents() {
 
     getValidator(validator).then((validatorData) => {
       if (validatorData.info.total_stake === BigInt(0)) {
-        delegate(validator);
+        delegate(validatorData);
       }
     });
 
