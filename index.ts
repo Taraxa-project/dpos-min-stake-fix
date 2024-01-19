@@ -93,7 +93,7 @@ async function listenForNewEvents() {
     console.log(`Undelegated ${amount} from ${validator} to ${delegator}`);
 
     getValidator(validator).then((validatorData) => {
-      if (validatorData.info.total_stake.valueOf() === BigInt(0)) {
+      if (validatorData.info.total_stake === BigInt(0)) {
         delegate(validator);
       }
     });
@@ -135,16 +135,16 @@ async function getValidators(): Promise<ValidatorData[]> {
 async function getValidator(address: string): Promise<ValidatorData> {
   const validator = await contract.getValidator(address);
   return {
-    account: validator[0],
+    account: address,
     info: {
-      total_stake: validator[1][0],
-      commission_reward: validator[1][1],
-      commission: validator[1][2],
-      last_commission_change: validator[1][3],
-      undelegations_count: validator[1][4],
-      owner: validator[1][5],
-      description: validator[1][5],
-      endpoint: validator[1][6]
+      total_stake: validator[0],
+      commission_reward: validator[1],
+      commission: validator[2],
+      last_commission_change: validator[3],
+      undelegations_count: validator[4],
+      owner: validator[5],
+      description: validator[5],
+      endpoint: validator[6]
     }
   };
 }
